@@ -13,9 +13,9 @@ interface GastosSectionProps {
 
 const categorias = [
   'Meu Cartão',
-  'Cartão - Pessoa 1',
-  'Cartão - Pessoa 2',
-  'Cartão - Pessoa 3',
+  'Cartão - Gui',
+  'Cartão - Carla',
+  'Cartão - Diana',
   'Dinheiro',
   'PIX',
   'Outros'
