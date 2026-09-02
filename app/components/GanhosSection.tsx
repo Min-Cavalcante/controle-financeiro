@@ -19,13 +19,13 @@ const GanhosSection = ({ ganhos, adicionarGanho, removerGanho, alterarGanho }: G
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
-    if (!descricao || !valor || !data) return
+    if (!descricao || !valor) return
 
     adicionarGanho({
-      descricao,
-      valor: parseFloat(valor),
-      data
-    })
+  descricao,
+  valor: parseFloat(valor),
+  data: data || new Date().toISOString().split('T')[0] // Usa data atual se vazio
+})
 
     setDescricao('')
     setValor('')
@@ -166,9 +166,11 @@ const GanhosSection = ({ ganhos, adicionarGanho, removerGanho, alterarGanho }: G
                   <div className="flex justify-between items-start mb-2">
                     <div className="flex-1">
                       <h3 className="font-semibold text-white">{ganho.descricao}</h3>
-                      <p className="text-sm text-purple-300">
-                        {new Date(ganho.data + 'T00:00:00').toLocaleDateString('pt-BR')}
-                      </p>
+                      {ganho.data && (
+  <p className="text-sm text-purple-300">
+    {new Date(ganho.data + 'T00:00:00').toLocaleDateString('pt-BR')}
+  </p>
+)}
                     </div>
                     <div className="flex gap-2">
                       <button
