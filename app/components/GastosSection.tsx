@@ -30,15 +30,15 @@ const GastosSection = ({ gastos, adicionarGasto, removerGasto, alterarGasto }: G
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
-    if (!descricao || !valor || !data) return
+    if (!descricao || !valor) return
 
     adicionarGasto({
-      descricao,
-      valor: parseFloat(valor),
-      categoria,
-      pago: false,
-      data
-    })
+  descricao,
+  valor: parseFloat(valor),
+  categoria,
+  pago: false,
+  data: data || new Date().toISOString().split('T')[0] // Usa data atual se vazio
+})
 
     setDescricao('')
     setValor('')
@@ -245,9 +245,11 @@ const GastosSection = ({ gastos, adicionarGasto, removerGasto, alterarGasto }: G
                         <CreditCard className="w-3 h-3 text-purple-300" />
                         <p className="text-xs text-purple-300">{gasto.categoria}</p>
                       </div>
-                      <p className="text-xs text-purple-300 mt-1">
-                        {new Date(gasto.data + 'T00:00:00').toLocaleDateString('pt-BR')}
-                      </p>
+                      {gasto.data && (
+  <p className="text-xs text-purple-300 mt-1">
+    {new Date(gasto.data + 'T00:00:00').toLocaleDateString('pt-BR')}
+  </p>
+)}
                     </div>
                     <div className="flex gap-2">
                       <button
